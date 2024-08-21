@@ -1,0 +1,23 @@
+# Use an official Node.js runtime as a parent image
+FROM node:18
+
+# Set the working directory in the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install development dependencies
+RUN npm install
+
+# Install ts-node globally for development
+RUN npm install -g ts-node
+
+# Copy the rest of the application files
+COPY . .
+
+# Expose the application port
+EXPOSE 3000
+
+# Command to run the application in development mode
+CMD ["npm", "run", "dev"]
